@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.MyTheme" parent="Theme.AppCompat.Light">
+        <!-- Set AppCompat’s actionBarStyle -->
+        <item name="actionBarStyle">@style/Theme.AppCompat.Light.DarkActionBar</item>
+
+        <!-- Set AppCompat’s color theming attrs -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item> <!-- colorPrimary is used for the default action bar background -->
+
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!-- The rest of your attributes -->
+    </style>
+
+
+</resources>
