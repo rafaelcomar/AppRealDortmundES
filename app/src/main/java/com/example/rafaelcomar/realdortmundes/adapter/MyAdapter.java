@@ -8,12 +8,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.rafaelcomar.realdortmundes.DAO.AtletaDAO;
 import com.example.rafaelcomar.realdortmundes.R;
 import com.example.rafaelcomar.realdortmundes.model.Atleta;
 import com.squareup.picasso.Picasso;
 
 
 import java.util.List;
+import java.util.TreeSet;
 
 
 /**
@@ -22,6 +24,10 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private Context myContext;
     private List<Atleta> listaAtletas;
+    private AtletaDAO atletaDAO = new AtletaDAO();
+
+
+    private TreeSet<Integer> sectionHeader = new TreeSet<Integer>();
 
     public MyAdapter(Context context) {
         myContext = context;
@@ -46,6 +52,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
 
 
+
     // Create new views (invoked by the layout manager)
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -66,6 +73,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 //        holder.mTextView.setText(mDataset[position]);
         if (listaAtletas != null){
             Atleta atleta = listaAtletas.get(position);
+
             holder.txtNomeAtleta.setText(atleta.getNome());
             Picasso.with(myContext)
                     .load(atleta.getThumbnail())

@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.rafaelcomar.realdortmundes.DAO.AtletaDAO;
 import com.example.rafaelcomar.realdortmundes.R;
 import com.example.rafaelcomar.realdortmundes.adapter.MyAdapter;
 import com.example.rafaelcomar.realdortmundes.model.Atleta;
@@ -32,6 +33,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class AtletasActivity extends AppCompatActivity {
+
+    AtletaDAO atletaDAO = new AtletaDAO();
 
     private RecyclerView mRecyclerView;
     private MyAdapter mAdapter;
@@ -114,36 +117,23 @@ public class AtletasActivity extends AppCompatActivity {
                     JSONObject jsonAtleta = jsonAtletas.getJSONObject(i);
 
                     Atleta at = new Atleta();
+                    at.setId(jsonAtleta.getLong("id"));
                     at.setNome(jsonAtleta.getString("title"));
                     at.setThumbnail(jsonAtleta.getString("thumbnail"));
-//                    Location location = new Location();
-//                    location.setId(jsonLocation.getInt("id"));
-//                    location.setTitle(jsonLocation.getString("title"));
-//                    location.setDescription(jsonLocation.getString("content"));
-//                    location.setThumbnail(jsonLocation.getString("thumbnail"));
-//
-//                    JSONObject jsonCustomFields = jsonLocation.getJSONObject("custom_fields");
-//
-//                    JSONArray jsonLatArray = jsonCustomFields.getJSONArray("latitude");
-//                    location.setLatitude(jsonLatArray.get(0).toString());
-//
-//                    JSONArray jsonLongArray = jsonCustomFields.getJSONArray("longitude");
-//                    location.setLongitude(jsonLongArray.get(0).toString());
-//
-//                    JSONArray jsonEnderecoArray = jsonCustomFields.getJSONArray("endereco");
-//                    location.setEndereco(jsonEnderecoArray.get(0).toString());
-//                    location.setCategory(category.getId());
 
+//                    atletas.add(at);
 
-
-
-                    atletas.add(at);
-                    publishProgress(atletas.size());
+                        atletaDAO.salvarAtleta(at);
+//                    Toast.makeText(getApplicationContext() , "" + atletaDAO.salvarAtleta(at) , Toast.LENGTH_SHORT);
+//                    publishProgress(atletas.size());
 
                 }
             } catch (IOException e) {
+//                atletas = atletaDAO.listarAtletas();
+//                mAdapter.update(atletas);
                 e.printStackTrace();
             } catch (JSONException e) {
+                System.out.println("erro ao pegar o JSON");
                 e.printStackTrace();
             }
 
@@ -165,7 +155,9 @@ public class AtletasActivity extends AppCompatActivity {
         protected void onPostExecute(List<Atleta> atletas) {
             super.onPostExecute(atletas);
 //            locationAdapter.update(locations);
+            atletas = Atleta.listAll(Atleta.class);
             mAdapter.update(atletas);
+
 
         }
     }

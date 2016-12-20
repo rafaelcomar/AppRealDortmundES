@@ -1,26 +1,29 @@
 package com.example.rafaelcomar.realdortmundes.model;
 
+import com.orm.SugarRecord;
+
 /**
  * Created by rafael.comar on 13/12/2016.
  */
 
-public class Atleta {
+public class Atleta extends SugarRecord {
 
-    private int id;
-    private String nome;
-    private String thumbnail;
-    private String dataNascimento;
-    private String posicao;
+     Long id;
+     String nome;
+     String thumbnail;
+     String dataNascimento;
+     String posicao;
 
     public Atleta() {
     }
 
 
-    public int getId() {
+    @Override
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
